@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://student-backend-05xx.onrender.com/api';
 
 const gradeClasses = { A: 'bg-accent/15 text-accent', B: 'bg-sky2/15 text-sky2', C: 'bg-amber2/15 text-amber2', D: 'bg-rose2/15 text-rose2', F: 'bg-rose2/25 text-rose2' };
 const feeClasses = { Paid: 'bg-accent/15 text-accent', Pending: 'bg-amber2/15 text-amber2', Overdue: 'bg-rose2/15 text-rose2' };

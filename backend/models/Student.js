@@ -2,11 +2,31 @@ const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true },
-    phone: { type: String, default: '' },
-    age: { type: Number, required: true, min: 5, max: 100 },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        validate: {
+            validator: function (v) {
+                return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v);
+            },
+            message: 'Please enter a valid email address'
+        }
+    },
+    phone: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (v) {
+                return /^[\+]?[0-9\s-]{10,15}$/.test(v.replace(/\s/g, ''));
+            },
+            message: 'Please enter a valid phone number (10-15 digits)'
+        }
+    },
+    dob: { type: Date, required: true },
     grade: { type: String, required: true, enum: ['A', 'B', 'C', 'D', 'F'] },
-    department: { type: String, required: true },
+    department: { type: String, required: true, enum: ['Computer Science', 'Electronics & Communication', 'Mechanical Engineering', 'Civil Engineering', 'Information Technology', 'Electrical Engineering'] },
     status: { type: String, default: 'Active', enum: ['Active', 'Inactive'] },
     feeStatus: { type: String, default: 'Pending', enum: ['Paid', 'Pending', 'Overdue'] },
     feeAmount: { type: Number, default: 0 },

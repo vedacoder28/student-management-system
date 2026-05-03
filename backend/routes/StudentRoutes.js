@@ -8,6 +8,10 @@ router.post('/', async (req, res) => {
         const saved = await student.save();
         res.status(201).json(saved);
     } catch (err) {
+        if (err.name === 'ValidationError') {
+            const messages = Object.values(err.errors).map(e => e.message);
+            return res.status(400).json({ message: messages.join(', ') });
+        }
         res.status(400).json({ message: err.message });
     }
 });
@@ -33,10 +37,14 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const updated = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updated = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!updated) return res.status(404).json({ message: 'Student not found' });
         res.json(updated);
     } catch (err) {
+        if (err.name === 'ValidationError') {
+            const messages = Object.values(err.errors).map(e => e.message);
+            return res.status(400).json({ message: messages.join(', ') });
+        }
         res.status(400).json({ message: err.message });
     }
 });

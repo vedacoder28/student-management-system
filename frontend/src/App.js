@@ -6,7 +6,7 @@ import Students from './components/Students';
 import Attendance from './components/Attendance';
 import Reports from './components/Reports';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://student-backend-05xx.onrender.com';
 const PAGES = { dashboard: 'Dashboard', students: 'Students', attendance: 'Attendance', reports: 'Reports' };
 
 function App() {

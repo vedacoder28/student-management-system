@@ -6,10 +6,8 @@ import Students from './components/Students';
 import Attendance from './components/Attendance';
 import Reports from './components/Reports';
 
-const API = 'https://student-backend-05xx.onrender.com';
+const API = 'https://student-backend-05xx.onrender.com/api';
 const PAGES = { dashboard: 'Dashboard', students: 'Students', attendance: 'Attendance', reports: 'Reports' };
-
-
 
 function App() {
   const [page, setPage] = useState('dashboard');
@@ -17,18 +15,20 @@ function App() {
   const [toasts, setToasts] = useState([]);
   const [search, setSearch] = useState('');
 
-  useEffect(() => { fetchStudents(); }, []);
-
-  const fetchStudents = async () => {
-    try {
-      const res = await axios.get(API + '/students');
-      setStudents(res.data);
-    } catch (err) {
-      addToast('Failed to load students', 'error');
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await axios.get(API + '/students');
+        setStudents(res.data);
+      } catch (err) {
+        addToast('Failed to load students', 'error');
+      }
     }
-  };
+    load();
+  }, []);
 
-  const addToast = (message, type = 'success') => {
+  const addToast = (message, type) => {
+    if (type === undefined) type = 'success';
     const id = Date.now();
     setToasts(prev => [...prev, { id, message, type }]);
     setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 3000);
@@ -60,7 +60,7 @@ function App() {
         </header>
         <main className="flex-1 overflow-y-auto p-7">
           {page === 'dashboard' && <Dashboard students={students} addToast={addToast} />}
-          {page === 'students' && <Students students={students} setStudents={setStudents} search={search} addToast={addToast} fetchStudents={fetchStudents} />}
+          {page === 'students' && <Students students={students} setStudents={setStudents} search={search} addToast={addToast} fetchStudents={() => { axios.get(API + '/students').then(r => setStudents(r.data)); }} />}
           {page === 'attendance' && <Attendance students={students} setStudents={setStudents} addToast={addToast} />}
           {page === 'reports' && <Reports students={students} addToast={addToast} />}
         </main>

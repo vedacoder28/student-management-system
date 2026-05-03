@@ -16,30 +16,17 @@ function Attendance({ students, setStudents, addToast }) {
 
     useEffect(() => { loadAttendance(); }, [date]);
 
-    const loadAttendance = async () => {
-        try {
-            const res = await axios.get(API + '/attendance/' + date);
-            const recs = {};
-            res.data.forEach(r => {
-                recs[r.studentId._id || r.studentId] = r.status;
-            });
-            setRecords(recs);
-            updateSummary(recs);
-        } catch (err) {
-            setRecords({});
-            updateSummary({});
-        }
-    };
+    const activeStudents = students.filter(s => s.status === 'Active');
 
-    const updateSummary = (recs) => {
-        let present = 0, absent = 0, late = 0;
-        Object.values(recs).forEach(s => {
-            if (s === 'Present') present++;
-            else if (s === 'Absent') absent++;
-            else if (s === 'Late') late++;
-        });
-        setSummary({ present, absent, late });
-    };
+    const updateSummary = (recs) => { ... };
+
+    const loadAttendance = async () => { ... };
+
+    useEffect(() => { loadAttendance(); }, [date]);
+
+    const setRecord = (studentId, status) => { ... };
+
+    const activeStudents = students.filter(s => s.status === 'Active');
 
     const setRecord = (studentId, status) => {
         const newRecords = { ...records, [studentId]: status };

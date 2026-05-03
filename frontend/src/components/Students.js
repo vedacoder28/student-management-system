@@ -156,7 +156,7 @@ function Students({ students, setStudents, search, addToast, fetchStudents }) {
                             {paged.length === 0 ? (
                                 <tr><td colSpan={7} className="text-center py-12 text-dark-300"><i className="fa-solid fa-user-graduate text-3xl opacity-20 mb-3 block"></i><p>No students found</p></td></tr>
                             ) : paged.map(function (s) {
-                                var pct = attPct(s.attendance);
+                                // var pct = attPct(s.attendance);
                                 return (
                                     <tr key={s._id} className="hover:bg-accent/[.02] transition-colors">
                                         <td className="px-4 py-3">

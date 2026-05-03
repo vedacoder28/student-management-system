@@ -19,9 +19,10 @@ const studentSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: function (v) {
-                return /^[\+]?[0-9\s-]{10,15}$/.test(v.replace(/\s/g, ''));
+                var cleaned = v.replace(/\s/g, '').replace(/\+/g, '');
+                return /^\d{10}$/.test(cleaned);
             },
-            message: 'Please enter a valid phone number (10-15 digits)'
+            message: 'Please enter exactly 10 digits after +91'
         }
     },
     dob: { type: Date, required: true },

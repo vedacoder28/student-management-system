@@ -220,8 +220,11 @@ function Students({ students, setStudents, search, addToast, fetchStudents }) {
                                 </div>
                                 <div className="flex flex-col gap-1.5">
                                     <label className="text-[10px] font-bold text-dark-300 uppercase tracking-wider">Phone</label>
-                                    <input required value={form.phone} onChange={function (e) { setForm(Object.assign({}, form, { phone: e.target.value })); }} className="bg-dark-800 border border-dark-500/40 text-dark-50 text-xs px-3 py-2.5 rounded-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 placeholder-dark-300/40" placeholder="+91 9876543210" />
-                                    <span className="text-[10px] text-dark-300 mt-1">10-15 digits, can include +91 prefix</span>
+                                    <div className="flex items-center">
+                                        <span className="bg-dark-800 border border-r-0 border-dark-500/40 text-dark-300 text-xs px-3 py-2.5 rounded-l-lg">+91</span>
+                                        <input required value={form.phone} onChange={function (e) { setForm(Object.assign({}, form, { phone: e.target.value })); }} maxLength="10" className="bg-dark-800 border border-l-0 border-dark-500/40 text-dark-50 text-xs px-3 py-2.5 rounded-r-lg outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 placeholder-dark-300/40" placeholder="9876543210" />
+                                    </div>
+                                    <span className="text-[10px] text-dark-300 mt-1">Enter exactly 10 digits after +91</span>
                                 </div>
                                 <div className="flex flex-col gap-1.5">
                                     <label className="text-[10px] font-bold text-dark-300 uppercase tracking-wider">Date of Birth</label>

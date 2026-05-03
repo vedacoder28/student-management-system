@@ -9,6 +9,7 @@ import Reports from './components/Reports';
 const API = 'https://student-backend-05xx.onrender.com';
 const PAGES = { dashboard: 'Dashboard', students: 'Students', attendance: 'Attendance', reports: 'Reports' };
 
+
 function App() {
   const [page, setPage] = useState('dashboard');
   const [students, setStudents] = useState([]);

@@ -155,7 +155,7 @@ function Students({ students, setStudents, search, addToast, fetchStudents }) {
                                 <th className="text-left px-4 py-3 text-[10px] font-bold text-dark-300 uppercase tracking-wider">Sem / CGPA</th>
                                 <th onClick={function () { handleSort('feeStatus'); }} className="text-left px-4 py-3 text-[10px] font-bold text-dark-300 uppercase tracking-wider cursor-pointer hover:text-accent">Fee <i className="fa-solid fa-sort ml-1 opacity-30"></i></th>
                                 <th onClick={function () { handleSort('status'); }} className="text-left px-4 py-3 text-[10px] font-bold text-dark-300 uppercase tracking-wider cursor-pointer hover:text-accent">Status <i className="fa-solid fa-sort ml-1 opacity-30"></i></th>
-                                <th className="text-left px-4 py-3 text-[10px] font-bold text-dark-300 uppercase tracking-wider">Actions</th>
+                                <th className="text-left px-4 py-3 text-[10px] font-bold text-dark-300 uppercase tracking-wider min-w-[180px]">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-dark-500/20">
@@ -181,7 +181,10 @@ function Students({ students, setStudents, search, addToast, fetchStudents }) {
                                         <td className="px-4 py-3">
                                             <div className="flex gap-1">
                                                 <button onClick={function () { setShowProfile(s); }} title="View Profile" className="w-7 h-7 rounded border border-dark-500/40 text-dark-300 hover:text-accent hover:border-accent hover:bg-accent/10 flex items-center justify-center text-[10px] transition-all"><i className="fa-solid fa-eye"></i></button>
-                                                <button onClick={function () { setShowAcademic(s); }} title="Academic Details" className="w-7 h-7 rounded border border-dark-500/40 text-dark-300 hover:text-accent hover:border-accent hover:bg-accent/10 flex items-center justify-center text-[10px] transition-all"><i className="fa-solid fa-graduation-cap"></i></button>
+                                                <button onClick={function () { setShowAcademic(s); }} title="Academic Details" className="flex items-center gap-1.5 px-2.5 h-7 rounded border border-accent/40 text-accent bg-accent/10 hover:bg-accent/20 hover:border-accent text-[10px] font-semibold transition-all">
+                                                    <i className="fa-solid fa-graduation-cap text-xs"></i>
+                                                    <span>Academic</span>
+                                                </button>
                                                 <button onClick={function () { openEdit(s); }} title="Edit" className="w-7 h-7 rounded border border-dark-500/40 text-dark-300 hover:text-accent hover:border-accent hover:bg-accent/10 flex items-center justify-center text-[10px] transition-all"><i className="fa-solid fa-pen"></i></button>
                                                 <button onClick={function () { handleDelete(s._id); }} title="Delete" className="w-7 h-7 rounded border border-dark-500/40 text-dark-300 hover:text-rose2 hover:border-rose2 hover:bg-rose2/10 flex items-center justify-center text-[10px] transition-all"><i className="fa-solid fa-trash"></i></button>
                                             </div>
